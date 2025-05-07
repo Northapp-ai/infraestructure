@@ -12,6 +12,7 @@ terraform.tfvars
 *.log
 *.bak
 *.swp
+*.zip
 
 # Directorios de configuración de IDEs
 .vscode/
@@ -21,3 +22,11 @@ terraform.tfvars
 # Archivos de credenciales de AWS
 .aws/
 environments/dev/.terraform/
+
+
+# Ignore all ZIPs from Lambda packages
+environments/*/*.zip
+
+# Optional: Exclude only certain Lambda zip files
+# environments/dev/lambda*.zip
+# environments/qa/lambda*.zip

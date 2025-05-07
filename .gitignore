@@ -1,0 +1,23 @@
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Variables sensibles
+terraform.tfvars
+*.tfvars
+
+# Archivos de logs y configuraciones temporales
+*.log
+*.bak
+*.swp
+
+# Directorios de configuración de IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos de credenciales de AWS
+.aws/
+environments/dev/.terraform/

@@ -1,0 +1,37 @@
+name: Deploy QA
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'environments/qa/**'
+      - '.github/workflows/deploy-qa.yml'
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.2
+
+      - name: Terraform Init
+        working-directory: environments/qa
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: environments/qa
+        run: terraform plan -var-file=terraform.tfvars
+
+      - name: Terraform Apply
+        working-directory: environments/qa
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
